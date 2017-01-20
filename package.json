@@ -1,0 +1,22 @@
+{
+  "name": "narwhal",
+  "version": "0.1.0",
+  "description": "A web browser for the terminal",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/dmnevius/Narwhal",
+    "type": "git"
+  },
+  "author": "dmnevius",
+  "license": "MIT",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "htmlparser2": "^3.9.2",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0"
+  }
+}
