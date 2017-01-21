@@ -7,7 +7,6 @@
 'use strict';
 
 const Narwhal = require('./lib');
-const plaintext = require('./lib/mode/plaintext');
 
 const browser = new Narwhal.Browser();
 browser.navigate(process.argv[2]).then(() => {}).catch((error) => {
