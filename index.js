@@ -10,12 +10,6 @@ const Narwhal = require('./lib');
 const plaintext = require('./lib/mode/plaintext');
 
 const browser = new Narwhal.Browser();
-browser.navigate(process.argv[2]).then((dom) => {
-  try {
-    console.log(plaintext(dom));
-  } catch (e) {
-    throw e;
-  }
-}).catch((error) => {
+browser.navigate(process.argv[2]).then(() => {}).catch((error) => {
   console.log(error);
 });
