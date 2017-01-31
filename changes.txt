@@ -1,4 +1,2 @@
-- Initialized the Node class
-- Created the nsIURI class
-- Created the NodeList class
-- Created the nsIPrincipal class
+- Fixed typo in XULControllers, StatusBar, LocationBar classes
+- Cleaned up index.js
