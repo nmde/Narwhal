@@ -1,0 +1,15 @@
+{
+  "name": "narwhal",
+  "version": "0.1.0",
+  "description": "A web browser for the terminal",
+  "main": "dist/narwhal.js",
+  "repository": {
+    "url": "https://github.com/dmnevius/Narwhal",
+    "type": "git"
+  },
+  "author": "dmnevius",
+  "license": "MIT",
+  "dependencies": {
+    "blessed": "^0.1.81"
+  }
+}
