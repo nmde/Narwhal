@@ -1,0 +1,7 @@
+- Removed window.applicationCache (deprecated)
+- Removed the OfflineResourceList class (deprecated)
+- Removed the Components property of Window (Web code should not use this property)
+- Added Node class
+- Added DOMImplementation class
+- Added DOMString class
+- Initialized the Document class
