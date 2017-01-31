@@ -10,6 +10,14 @@
   "author": "dmnevius",
   "license": "MIT",
   "dependencies": {
-    "blessed": "^0.1.81"
+    "blessed": "^0.1.81",
+    "htmlparser2": "^3.9.2",
+    "parserlib": "^1.1.1",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0"
   }
 }
