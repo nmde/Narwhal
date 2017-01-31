@@ -1,2 +1,1 @@
-- Fixed typo in XULControllers, StatusBar, LocationBar classes
-- Cleaned up index.js
+- Initialized the EventTarget class
