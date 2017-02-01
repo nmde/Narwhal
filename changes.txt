@@ -1,7 +1,6 @@
-- Initialized Element class
-- Created HTMLSlotElement class
-- Created NamedNodeMap class
-- Created DOMTokenList class
-- Created NonDocumentTypeChildNode class
-- Created UndoManager class
-- Created ChildNode class
+- Added and initialized the Attr class
+- Initialized the NamedNodeMap class
+- Added Element.setAttribute
+- Added NamedNodeMap.getNamedItem
+- Added NamedNodeMap.item
+- Added NamedNodeMap.setNamedItem

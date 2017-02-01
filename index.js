@@ -3,4 +3,6 @@
 const Narwhal = require('./lib');
 
 const window = new Narwhal.Window();
-console.log(window.document.createElement('div'));
+const div = window.document.createElement('div');
+div.setAttribute('class', 'foo');
+console.log(div.attributes);

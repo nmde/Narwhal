@@ -1,6 +1,6 @@
 {
   "name": "narwhal",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A web browser for the terminal",
   "main": "dist/narwhal.js",
   "repository": {
