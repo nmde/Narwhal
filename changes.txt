@@ -1,1 +1,1 @@
-- Added Element.getAttribute
+- Added Element.hasAttribute
