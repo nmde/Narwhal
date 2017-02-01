@@ -1,6 +1,6 @@
 {
   "name": "narwhal",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "A web browser for the terminal",
   "main": "dist/narwhal.js",
   "repository": {
@@ -12,5 +12,11 @@
   "dependencies": {
     "blessed": "^0.1.81"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "rollup": "^0.41.4",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1"
+  }
 }

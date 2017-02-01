@@ -1,1 +1,2 @@
-- Added Element.hasAttribute
+- Initialized the screen class
+- Started using rollup to create a distribution file
