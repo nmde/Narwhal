@@ -1,2 +1,1 @@
-- Added NamedNodeMap.removeNamedItem
-- NamedNodeMap.setNamedItem now returns what it is supposed to (according to W3Schools)
+- Replaced DOMString with normal strings
