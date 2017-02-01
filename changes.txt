@@ -1,1 +1,1 @@
-- Replaced DOMString with normal strings
+- Added Element.getAttribute
