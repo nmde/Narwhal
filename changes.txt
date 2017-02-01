@@ -1,6 +1,2 @@
-- Added and initialized the Attr class
-- Initialized the NamedNodeMap class
-- Added Element.setAttribute
-- Added NamedNodeMap.getNamedItem
-- Added NamedNodeMap.item
-- Added NamedNodeMap.setNamedItem
+- Added NamedNodeMap.removeNamedItem
+- NamedNodeMap.setNamedItem now returns what it is supposed to (according to W3Schools)
