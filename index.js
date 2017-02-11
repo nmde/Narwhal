@@ -5,4 +5,4 @@ const Narwhal = require('./lib');
 const window = new Narwhal.Window();
 const div = window.document.createElement('div');
 div.setAttribute('class', 'foo');
-console.log(div.attributes);
+window.render();
