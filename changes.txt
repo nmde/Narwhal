@@ -1,2 +1,2 @@
-- The screen class now contains a Blessed screen
-- Added a render method to the window for rendering the screen
+- Changing document.title now automatically updates the screen title
+- Added "watch" util for watching variable changes
