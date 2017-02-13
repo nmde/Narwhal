@@ -1,3 +1,4 @@
-- Created a BasicMap utility class for list based classes
-- Integrated NamedNodeMap with BasicMap
-- Integrated NodeList with BasicMap
+- Added NodeList.entries
+- Added NodeList.forEach
+- Added NodeList.keys
+- Added NodeList.values
