@@ -1,4 +1,3 @@
-- Added NodeList.entries
-- Added NodeList.forEach
-- Added NodeList.keys
-- Added NodeList.values
+- Added BasicMap.push
+- Added Node.appendChild
+- Fixed comments in NodeList
