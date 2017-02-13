@@ -1,1 +1,3 @@
-- Initialized the NodeList class
+- Created a BasicMap utility class for list based classes
+- Integrated NamedNodeMap with BasicMap
+- Integrated NodeList with BasicMap
