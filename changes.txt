@@ -1,2 +1,1 @@
-- Changing document.title now automatically updates the screen title
-- Added "watch" util for watching variable changes
+- Initialized the NodeList class
