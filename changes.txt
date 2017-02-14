@@ -1,0 +1,3 @@
+- Added BasicMap.push
+- Added Node.appendChild
+- Fixed comments in NodeList
