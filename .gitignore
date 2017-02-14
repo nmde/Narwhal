@@ -68,6 +68,9 @@ jspm_packages
 
 
 # End of https://www.gitignore.io/api/linux,node
+<<<<<<< HEAD
 
 # Old .git
 .git-backup
+=======
+>>>>>>> 37b135bdbdf138440ced708ea2610509d4beff2f
