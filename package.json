@@ -4,10 +4,10 @@
   "description": "A web browser for the terminal",
   "main": "dist/narwhal.js",
   "repository": {
-    "url": "https://github.com/dmnevius/Narwhal",
+    "url": "https://github.com/nmde/Narwhal",
     "type": "git"
   },
-  "author": "dmnevius",
+  "author": "nmde",
   "license": "MIT",
   "dependencies": {
     "blessed": "^0.1.81"
