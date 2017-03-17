@@ -1,3 +1,2 @@
-- Added some doc comments
-- Nodes are now initialized with a corresponding blessed box
-- Added Screen.createBox
+- Added a Browser class
+- Added an HTML parser
