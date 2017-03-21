@@ -25,7 +25,6 @@ export default function get(path) {
     const parsedUrl = url.parse(path);
     switch (parsedUrl.protocol) {
     case 'https:':
-      console.log('Using https');
       https.get(path, (res) => {
         handleResult(res).then((finalResult) => {
           resolve(finalResult);
@@ -35,7 +34,6 @@ export default function get(path) {
       });
       break;
     case 'http:':
-      console.log('Using http');
       http.get(path, (res) => {
         handleResult(res).then((finalResult) => {
           resolve(finalResult);
