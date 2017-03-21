@@ -4,17 +4,9 @@
 
 const Narwhal = require('./dist/narwhal');
 
-// Google something
-const browser = new Narwhal.Browser('http://google.com');
-browser.click('#lst-ib');
-browser.type('Narwhal');
-browser.keydown('enter');
-console.log(browser.location.href);
-
-// Run code in a browser
-const window = new Narwhal.Window();
-window.exec(function () {
-  const element = this.document.createElement('div');
-  element.setAttribute('foo', 'bar');
-  console.log(element);
+const browser = new Narwhal.Browser();
+browser.open('http://dmnevius.net').then((html) => {
+  console.log(html);
+}).catch((e) => {
+  console.log(`An error occured: ${e}`);
 });
