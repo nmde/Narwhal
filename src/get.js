@@ -20,7 +20,7 @@ function handleResult(res) {
   });
 }
 
-export default function get(path) {
+function get(path) {
   return new Promise((resolve, reject) => {
     const parsedUrl = url.parse(path);
     switch (parsedUrl.protocol) {
@@ -47,3 +47,5 @@ export default function get(path) {
     }
   });
 }
+
+export default get;

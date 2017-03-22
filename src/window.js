@@ -1,1 +1,3 @@
-export default class Window {}
+class Window {}
+
+export default Window;
