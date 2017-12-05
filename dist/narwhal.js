@@ -1,18 +1,319 @@
-var $jscomp={scope:{},inherits:function(a,c){function d(){}d.prototype=c.prototype;a.prototype=new d;a.prototype.constructor=a;for(var b in c)if(Object.defineProperties){var e=Object.getOwnPropertyDescriptor(c,b);e&&Object.defineProperty(a,b,e)}else a[b]=c[b]}};$jscomp.defineProperty="function"==typeof Object.defineProperties?Object.defineProperty:function(a,c,d){if(d.get||d.set)throw new TypeError("ES3 does not support getters and setters.");a!=Array.prototype&&a!=Object.prototype&&(a[c]=d.value)};
-$jscomp.getGlobal=function(a){return"undefined"!=typeof window&&window===a?a:"undefined"!=typeof global&&null!=global?global:a};$jscomp.global=$jscomp.getGlobal(this);$jscomp.SYMBOL_PREFIX="jscomp_symbol_";$jscomp.initSymbol=function(){$jscomp.initSymbol=function(){};$jscomp.global.Symbol||($jscomp.global.Symbol=$jscomp.Symbol)};$jscomp.symbolCounter_=0;$jscomp.Symbol=function(a){return $jscomp.SYMBOL_PREFIX+(a||"")+$jscomp.symbolCounter_++};
-$jscomp.initSymbolIterator=function(){$jscomp.initSymbol();var a=$jscomp.global.Symbol.iterator;a||(a=$jscomp.global.Symbol.iterator=$jscomp.global.Symbol("iterator"));"function"!=typeof Array.prototype[a]&&$jscomp.defineProperty(Array.prototype,a,{configurable:!0,writable:!0,value:function(){return $jscomp.arrayIterator(this)}});$jscomp.initSymbolIterator=function(){}};$jscomp.arrayIterator=function(a){var c=0;return $jscomp.iteratorPrototype(function(){return c<a.length?{done:!1,value:a[c++]}:{done:!0}})};
-$jscomp.iteratorPrototype=function(a){$jscomp.initSymbolIterator();a={next:a};a[$jscomp.global.Symbol.iterator]=function(){return this};return a};$jscomp.makeIterator=function(a){$jscomp.initSymbolIterator();var c=a[Symbol.iterator];return c?c.call(a):$jscomp.arrayIterator(a)};
-$jscomp.polyfill=function(a,c,d,b){if(c){d=$jscomp.global;a=a.split(".");for(b=0;b<a.length-1;b++){var e=a[b];e in d||(d[e]={});d=d[e]}a=a[a.length-1];b=d[a];c=c(b);c!=b&&null!=c&&$jscomp.defineProperty(d,a,{configurable:!0,writable:!0,value:c})}};$jscomp.EXPOSE_ASYNC_EXECUTOR=!0;$jscomp.FORCE_POLYFILL_PROMISE=!1;
-$jscomp.polyfill("Promise",function(a){function c(){this.batch_=null}if(a&&!$jscomp.FORCE_POLYFILL_PROMISE)return a;c.prototype.asyncExecute=function(a){null==this.batch_&&(this.batch_=[],this.asyncExecuteBatch_());this.batch_.push(a);return this};c.prototype.asyncExecuteBatch_=function(){var a=this;this.asyncExecuteFunction(function(){a.executeBatch_()})};var d=$jscomp.global.setTimeout;c.prototype.asyncExecuteFunction=function(a){d(a,0)};c.prototype.executeBatch_=function(){for(;this.batch_&&this.batch_.length;){var a=
-this.batch_;this.batch_=[];for(var b=0;b<a.length;++b){var c=a[b];delete a[b];try{c()}catch(h){this.asyncThrow_(h)}}}this.batch_=null};c.prototype.asyncThrow_=function(a){this.asyncExecuteFunction(function(){throw a;})};var b=function(a){this.state_=0;this.result_=void 0;this.onSettledCallbacks_=[];var b=this.createResolveAndReject_();try{a(b.resolve,b.reject)}catch(g){b.reject(g)}};b.prototype.createResolveAndReject_=function(){function a(a){return function(f){c||(c=!0,a.call(b,f))}}var b=this,c=
-!1;return{resolve:a(this.resolveTo_),reject:a(this.reject_)}};b.prototype.resolveTo_=function(a){if(a===this)this.reject_(new TypeError("A Promise cannot resolve to itself"));else if(a instanceof b)this.settleSameAsPromise_(a);else{var c;a:switch(typeof a){case "object":c=null!=a;break a;case "function":c=!0;break a;default:c=!1}c?this.resolveToNonPromiseObj_(a):this.fulfill_(a)}};b.prototype.resolveToNonPromiseObj_=function(a){var b=void 0;try{b=a.then}catch(g){this.reject_(g);return}"function"==
-typeof b?this.settleSameAsThenable_(b,a):this.fulfill_(a)};b.prototype.reject_=function(a){this.settle_(2,a)};b.prototype.fulfill_=function(a){this.settle_(1,a)};b.prototype.settle_=function(a,b){if(0!=this.state_)throw Error("Cannot settle("+a+", "+b|"): Promise already settled in state"+this.state_);this.state_=a;this.result_=b;this.executeOnSettledCallbacks_()};b.prototype.executeOnSettledCallbacks_=function(){if(null!=this.onSettledCallbacks_){for(var a=this.onSettledCallbacks_,b=0;b<a.length;++b)a[b].call(),
-a[b]=null;this.onSettledCallbacks_=null}};var e=new c;b.prototype.settleSameAsPromise_=function(a){var b=this.createResolveAndReject_();a.callWhenSettled_(b.resolve,b.reject)};b.prototype.settleSameAsThenable_=function(a,b){var c=this.createResolveAndReject_();try{a.call(b,c.resolve,c.reject)}catch(h){c.reject(h)}};b.prototype.then=function(a,c){function d(a,b){return"function"==typeof a?function(b){try{e(a(b))}catch(m){f(m)}}:b}var e,f,n=new b(function(a,b){e=a;f=b});this.callWhenSettled_(d(a,e),
-d(c,f));return n};b.prototype["catch"]=function(a){return this.then(void 0,a)};b.prototype.callWhenSettled_=function(a,b){function c(){switch(d.state_){case 1:a(d.result_);break;case 2:b(d.result_);break;default:throw Error("Unexpected state: "+d.state_);}}var d=this;null==this.onSettledCallbacks_?e.asyncExecute(c):this.onSettledCallbacks_.push(function(){e.asyncExecute(c)})};b.resolve=function(a){return a instanceof b?a:new b(function(b,c){b(a)})};b.reject=function(a){return new b(function(b,c){c(a)})};
-b.race=function(a){return new b(function(c,d){for(var e=$jscomp.makeIterator(a),f=e.next();!f.done;f=e.next())b.resolve(f.value).callWhenSettled_(c,d)})};b.all=function(a){var c=$jscomp.makeIterator(a),d=c.next();return d.done?b.resolve([]):new b(function(a,e){function f(b){return function(c){g[b]=c;k--;0==k&&a(g)}}var g=[],k=0;do g.push(void 0),k++,b.resolve(d.value).callWhenSettled_(f(g.length-1),e),d=c.next();while(!d.done)})};$jscomp.EXPOSE_ASYNC_EXECUTOR&&(b.$jscomp$new$AsyncExecutor=function(){return new c});
-return b},"es6-impl","es3");
-(function(a){function c(b){if(d[b])return d[b].exports;var e=d[b]={i:b,l:!1,exports:{}};a[b].call(e.exports,e,e.exports,c);e.l=!0;return e.exports}var d={};c.m=a;c.c=d;c.i=function(a){return a};c.d=function(a,d,f){c.o(a,d)||Object.defineProperty(a,d,{configurable:!1,enumerable:!0,get:f})};c.n=function(a){var b=a&&a.__esModule?function(){return a["default"]}:function(){return a};c.d(b,"a",b);return b};c.o=function(a,c){return Object.prototype.hasOwnProperty.call(a,c)};c.p="";return c(c.s=10)})([function(a,
-c,d){var b=d(3),e=d(4);a=function(a){"string"===typeof a&&this.open(a);this.document=null;this.onOpen=function(){}};a.prototype.open=function(a){var c=this;return new Promise(function(g,f){c.location=a;d.i(b.a)(a).then(function(a){d.i(e.a)(a).then(function(a){c.document=a;c.onOpen(a);g(a)})["catch"](function(a){f(a)})})["catch"](function(a){f(a)})})};c.a=a},function(a,c,d){a=d(5);d.n(a);var b=d(0).a;d=function(a){a=b.call(this,a)||this;a.onOpen=function(a){console.log("Opening graphical DOM")};return a};
-$jscomp.inherits(d,b);c.a=d},function(a,c,d){c.a=function(){}},function(a,c,d){function b(a){return new Promise(function(b,c){var d=a.statusCode;if(200>d||400<=d)c(Error("Error "+d));else{a.setEncoding("utf-8");var e="";a.on("data",function(a){e+=a});a.on("end",function(){b(e)})}})}a=d(6);var e=d.n(a);a=d(7);var f=d.n(a);a=d(9);var l=d.n(a);c.a=function(a){return new Promise(function(c,d){var g=l.a.parse(a);switch(g.protocol){case "https:":f.a.get(a,function(a){b(a).then(function(a){c(a)})["catch"](function(a){d(a)})});
-break;case "http:":e.a.get(a,function(a){b(a).then(function(a){c(a)})["catch"](function(a){d(a)})});break;default:d(Error("Unknown protocol: "+g.protocol))}})}},function(a,c,d){a=d(8);var b=d.n(a);c.a=function(a){return new Promise(function(c){c(b.a.parse(a))})}},function(a,c){a.exports=blessed},function(a,c){a.exports=require("http")},function(a,c){a.exports=require("https")},function(a,c){a.exports=parse5},function(a,c){a.exports=require("url")},function(a,c,d){Object.defineProperty(c,"__esModule",
-{value:!0});a=d(0);var b=d(1);d=d(2);c["default"]={Browser:a.a,GraphicalBrowser:b.a,Window:d.a}}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__get__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parse__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__convert_dom__ = __webpack_require__(3);
+
+
+
+
+class Browser {
+  constructor(url) {
+    if (typeof url === 'string') {
+      this.open(url);
+    }
+    this.document = null;
+    this.onOpen = () => {};
+  }
+  open(url) {
+    return new Promise((resolve, reject) => {
+      this.location = url;
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get__["a" /* default */])(url).then((html) => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__parse__["a" /* default */])(html).then((dom) => {
+          const converted = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__convert_dom__["a" /* default */])(dom);
+          this.document = converted;
+          this.onOpen(converted);
+          resolve(converted);
+        }).catch((e) => {
+          reject(e);
+        });
+      }).catch((e) => {
+        reject(e);
+      });
+    });
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = Browser;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blessed___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blessed__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__browser__ = __webpack_require__(0);
+
+
+
+const BrowserTemp = __WEBPACK_IMPORTED_MODULE_1__browser__["a" /* default */];
+
+class GraphicalBrowser extends BrowserTemp {
+  constructor(url) {
+    super(url);
+    this.onOpen = (dom) => {
+      console.log('Opening graphical DOM');
+    };
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = GraphicalBrowser;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Window {}
+
+/* harmony default export */ __webpack_exports__["a"] = Window;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node__ = __webpack_require__(5);
+/* harmony export (immutable) */ __webpack_exports__["a"] = convertDOM;
+
+
+// This will have a purpose later
+function convertDOM(dom) {
+  const node = new __WEBPACK_IMPORTED_MODULE_0__node__["a" /* default */](dom);
+  if (dom.childNodes) {
+    for (let i = 0; i < dom.childNodes.length; i += 1) {
+      node.appendChild(convertDOM(dom.childNodes[i]));
+    }
+  }
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_http__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_https__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_https___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_https__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_url__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_url___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_url__);
+
+
+
+
+function handleResult(res) {
+  return new Promise((resolve, reject) => {
+    const status = res.statusCode;
+    if (status < 200 || status >= 400) {
+      reject(new Error(`Error ${status}`));
+    } else {
+      res.setEncoding('utf-8');
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        resolve(data);
+      });
+    }
+  });
+}
+
+function get(path) {
+  return new Promise((resolve, reject) => {
+    const parsedUrl = __WEBPACK_IMPORTED_MODULE_2_url___default.a.parse(path);
+    switch (parsedUrl.protocol) {
+    case 'https:':
+      __WEBPACK_IMPORTED_MODULE_1_https___default.a.get(path, (res) => {
+        handleResult(res).then((finalResult) => {
+          resolve(finalResult);
+        }).catch((e) => {
+          reject(e);
+        });
+      });
+      break;
+    case 'http:':
+      __WEBPACK_IMPORTED_MODULE_0_http___default.a.get(path, (res) => {
+        handleResult(res).then((finalResult) => {
+          resolve(finalResult);
+        }).catch((e) => {
+          reject(e);
+        });
+      });
+      break;
+    default:
+      reject(new Error(`Unknown protocol: ${parsedUrl.protocol}`));
+    }
+  });
+}
+
+/* harmony default export */ __webpack_exports__["a"] = get;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Node {
+  constructor(data) {
+    this.nodeName = data.nodeName;
+    this.attributes = data.attrs;
+    this.childNodes = [];
+  }
+  appendChild(child) {
+    this.childNodes.push(child);
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Node;
+
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_parse5__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_parse5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_parse5__);
+
+
+function parse(html) {
+  return new Promise((resolve) => {
+    resolve(__WEBPACK_IMPORTED_MODULE_0_parse5___default.a.parse(html));
+  });
+}
+
+/* harmony default export */ __webpack_exports__["a"] = parse;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("blessed");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("parse5");
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = require("url");
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__browser__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__graphicalBrowser__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__window__ = __webpack_require__(2);
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+  Browser: __WEBPACK_IMPORTED_MODULE_0__browser__["a" /* default */],
+  GraphicalBrowser: __WEBPACK_IMPORTED_MODULE_1__graphicalBrowser__["a" /* default */],
+  Window: __WEBPACK_IMPORTED_MODULE_2__window__["a" /* default */],
+};
+
+
+/***/ })
+/******/ ]);

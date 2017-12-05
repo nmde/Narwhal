@@ -5,13 +5,12 @@ module.exports = {
   output: {
     filename: 'narwhal.js',
     path: './dist',
+    libraryTarget: 'commonjs2',
   },
-  externals: [
-    {
-      blessed: true,
-      parse5: true,
-    },
-  ],
+  externals: {
+    blessed: 'commonjs blessed',
+    parse5: 'commonjs parse5',
+  },
   module: {
     rules: [
       {
@@ -28,11 +27,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new ClosureCompiler({
+    /*new ClosureCompiler({
       language_in: 'ECMASCRIPT6',
       language_out: 'ECMASCRIPT5',
       compilation_level: 'ADVANCED',
-    }),
+    }),*/
   ],
   target: 'node',
 };

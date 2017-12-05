@@ -2,11 +2,11 @@
 
 'use strict';
 
-const Narwhal = require('./src/main');
+const Narwhal = require('./dist/narwhal').default;
 
-const browser = new Narwhal.GraphicalBrowser();
-browser.open('http://dmnevius.net').then((html) => {
-  console.log(html);
-}).catch((e) => {
-  console.log(`An error occured: ${e}`);
+const browser = new Narwhal();
+
+browser.run((window, document) => {
+  console.log(window);
+  console.log(document);
 });

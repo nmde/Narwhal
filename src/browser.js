@@ -1,5 +1,6 @@
 import get from './get';
 import parse from './parse';
+import convertDOM from './convert-dom';
 
 class Browser {
   constructor(url) {
@@ -14,9 +15,10 @@ class Browser {
       this.location = url;
       get(url).then((html) => {
         parse(html).then((dom) => {
-          this.document = dom;
-          this.onOpen(dom);
-          resolve(dom);
+          const converted = convertDOM(dom);
+          this.document = converted;
+          this.onOpen(converted);
+          resolve(converted);
         }).catch((e) => {
           reject(e);
         });
