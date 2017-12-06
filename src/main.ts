@@ -8,7 +8,9 @@ import Node from './node';
 import Window from './window';
 
 export default class Narwhal {
+  private timeOrigin: number;
   run(fn) {
+    this.timeOrigin = Date.now();
     fn(new Window(), new Document());
   }
   static Document = Document;
