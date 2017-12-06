@@ -4,23 +4,23 @@ import Element from './element';
 import Node from './node';
 
 export default class Event {
-  readonly bubbles: boolean;
+  protected bubbles: boolean;
   cancelBubble: boolean;
-  readonly cancelable: boolean;
-  readonly composed: boolean;
-  readonly currentTarget: Element;
+  protected cancelable: boolean;
+  protected composed: boolean;
+  protected currentTarget: Element;
   deepPath: Node[];
-  readonly defaultPrevented: boolean;
-  readonly eventPhase: number;
-  readonly explicitOriginalTarget: Element;
-  readonly originalTarget: Element;
+  protected defaultPrevented: boolean;
+  protected eventPhase: number;
+  protected explicitOriginalTarget: Element;
+  protected originalTarget: Element;
   returnValue: boolean;
-  readonly scoped: boolean;
-  srcElement: Element;
-  readonly target: Element;
-  readonly timeStamp: DOMHighResTimeStamp;
-  readonly type: DOMString;
-  readonly isTrusted: boolean;
+  protected scoped: boolean;
+  public srcElement: Element;
+  protected target: Element;
+  protected timeStamp: DOMHighResTimeStamp;
+  protected type: DOMString;
+  protected isTrusted: boolean;
   constructor(
     typeArg: DOMString,
     eventInit: {
@@ -38,5 +38,19 @@ export default class Event {
     this.isTrusted = true;
     this.timeStamp = new DOMHighResTimeStamp();
     this.type = typeArg;
+  }
+  initEvent(type: DOMString, bubbles: boolean = false, cancelable: boolean = false) {
+    this.type = type;
+    this.bubbles = bubbles;
+    this.cancelable = cancelable;
+  }
+  preventDefault() {
+    // @TODO once elements are further developed
+  }
+  stopImmediatePropagation() {
+    // @TODO
+  }
+  stopPropagation() {
+    // @TODO
   }
 }
