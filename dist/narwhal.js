@@ -64,7 +64,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -72,35 +72,15 @@ module.exports =
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class Document {}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Document;
-
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Window {}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Window;
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__window__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__document__ = __webpack_require__(0);
+throw new Error("Cannot find module \"./window\"");
+throw new Error("Cannot find module \"./document\"");
 
 
 
 class Narwhal {
   run(fn) {
-    fn(new __WEBPACK_IMPORTED_MODULE_0__window__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_1__document__["a" /* default */]());
+    fn(new __WEBPACK_IMPORTED_MODULE_0__window___default.a(), new __WEBPACK_IMPORTED_MODULE_1__document___default.a());
   }
 }
 /* harmony export (immutable) */ __webpack_exports__["default"] = Narwhal;
