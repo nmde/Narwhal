@@ -1,6 +1,6 @@
 {
   "name": "narwhal",
-  "version": "0.15.1",
+  "version": "0.16.0",
   "description": "A web browser for Node",
   "main": "dist/narwhal.js",
   "repository": {
@@ -17,5 +17,7 @@
     "rollup-plugin-typescript": "^0.8.1",
     "typescript": "^2.6.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "fetter-js": "^0.13.0"
+  }
 }
