@@ -2,12 +2,6 @@
 
 'use strict';
 
-const Narwhal = require('./dist/narwhal').default;
+const Narwhal = require('./dist/narwhal');
 
-const browser = new Narwhal();
-
-browser.run((window, document) => {
-  const greeting = document.createElement('h1');
-  greeting.innerText = 'Hello, World!';
-  console.log(greeting);
-});
+console.log(new Narwhal.Event());
