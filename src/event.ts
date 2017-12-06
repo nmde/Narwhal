@@ -36,7 +36,8 @@ export default class Event {
     this.defaultPrevented = false;
     this.eventPhase = 0;
     this.isTrusted = true;
-    this.timeStamp = new DOMHighResTimeStamp();
+    // @TODO: Get timeOrigin from event target
+    this.timeStamp = new DOMHighResTimeStamp(0);
     this.type = typeArg;
   }
   initEvent(type: DOMString, bubbles: boolean = false, cancelable: boolean = false) {
