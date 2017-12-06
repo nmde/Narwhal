@@ -1,9 +1,8 @@
-import Browser from './browser';
-import GraphicalBrowser from './graphicalBrowser';
 import Window from './window';
+import Document from './document';
 
-export default {
-  Browser,
-  GraphicalBrowser,
-  Window,
-};
+export default class Narwhal {
+  run(fn) {
+    fn(new Window(), new Document());
+  }
+}
