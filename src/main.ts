@@ -1,24 +1,47 @@
-import Document from './document';
-import DOMHighResTimeStamp from './domHighResTimeStamp';
-import DOMString from './domString';
-import Element from './element';
-import Event from './event';
 import EventTarget from './eventTarget';
-import Node from './node';
 import Window from './window';
+import RunnableFunction from './helpers/runnableFunction';
 
+/**
+ * @class Narwhal
+ * @classdesc A Narwhal browser
+ */
 export default class Narwhal {
-  private timeOrigin: number;
-  run(fn) {
-    this.timeOrigin = Date.now();
-    fn(new Window(), new Document());
+  /**
+   * The window associated with this instance
+   * @name Narwhal#window
+   * @type Window
+   * @public
+   */
+  public window: Window;
+
+  /**
+   * @constructs
+   */
+  constructor() {
+    this.window = new Window();
   }
-  static Document = Document;
-  static DOMHighResTimeStamp = DOMHighResTimeStamp;
-  static DOMString = DOMString;
-  static Element = Element;
-  static Event = Event;
+  
+  /**
+   * Runs the provided function with Narwhal's window
+   * @param {RunnableFunction} fn The function to run
+   */
+  run(fn: RunnableFunction) {
+    fn(this.window);
+  }
+
+  /**
+   * A staticly accessible reference to EventTarget
+   * @name Narwhal.EventTarget
+   * @type EventTarget
+   * @static
+   */
   static EventTarget = EventTarget;
-  static Node = Node;
+  /**
+   * A staticly accessible reference to Window
+   * @name Narwhal.Window
+   * @type Window
+   * @static
+   */
   static Window = Window;
 }
