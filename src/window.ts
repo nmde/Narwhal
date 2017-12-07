@@ -1,4 +1,3 @@
-import BarProp from './barProp';
 import Console from './console';
 import Crypto from './crypto';
 import Document from './document';
@@ -16,6 +15,7 @@ import Storage from './storage';
 import VisualViewport from './visualViewport';
 import WindowOrWorkerGlobalScope from './windowOrWorkerGlobalScope';
 import WindowEventHandlers from './windowEventHandlers';
+import BarProp from './helpers/barProp';
 
 /**
  * @class Window
