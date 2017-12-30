@@ -19,13 +19,6 @@ export default class Narwhal {
   public window: Window;
 
   /**
-   * @constructs
-   */
-  constructor() {
-    this.window = new Window(new Location());
-  }
-
-  /**
    * Opens the specified URL as a Narwhal window
    * @param {string} url The URL to open
    * @return {Promise<string>} A promise that will resolve the HTML of the requested page
@@ -39,6 +32,7 @@ export default class Narwhal {
             reject(err);
           } else {
             resolve(body);
+            this.window = new Window(new Location(url));
           }
         },
       );

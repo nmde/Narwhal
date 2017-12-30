@@ -1,3 +1,4 @@
+import parseUrl from 'parse-url';
 import HTMLHyperlinkElementUtils from './htmlHyperlinkElementUtils';
 
 export default class Location implements HTMLHyperlinkElementUtils {
@@ -26,12 +27,22 @@ export default class Location implements HTMLHyperlinkElementUtils {
   public hash: string;
   public username: string;
   public password: string;
-  public origin: string;
+  protected origin: string;
+
+  /**
+   * @constructs
+   * @param {string} initialUrl The initial URL
+   */
+  constructor(initialUrl: string) {
+    this.parseUrl(initialUrl);
+  }
+
   /**
    * Loads the specified URL in the window
    * @param {string} url The URL to load
    */
   assign(url: string) {
+    this.parseUrl(url);
     // @TODO
   }
   /**
@@ -49,5 +60,30 @@ export default class Location implements HTMLHyperlinkElementUtils {
   replace(url: string) {
     // @TODO: History
     this.assign(url);
+  }
+  /**
+   * Parses the specified URL and updates all properities to match
+   * @param {string} url The target URL
+   */
+  private parseUrl(url: string) {
+    const parsed = parseUrl(url);
+    this._href = parsed.href;
+    this.protocol = parsed.protocol;
+    this.hostname = parsed.resource;
+    if (parsed.port) {
+      this.host = `${parsed.resource}:${parsed.port}`;
+      this.origin = `${parsed.protocol}://${parsed.resource}:${parsed.port}`;
+    } else {
+      this.host = parsed.resource;
+      this.origin = `${parsed.protocol}://${parsed.resource}`;
+    }
+    this.port = parsed.port;
+    this.pathname = parsed.pathname;
+    this.search = parsed.search;
+    this.hash = parsed.hash;
+    if (parsed.user.length > 0) {
+      this.username = parsed.user.split(':')[0];
+      this.password = parsed.user.split(':')[1];
+    }
   }
 }

@@ -9,6 +9,7 @@ export default {
     'async',
     'fetter-js',
     'request',
+    'parse-url',
   ],
   plugins: [
     nodeGlobals(),

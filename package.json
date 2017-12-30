@@ -1,6 +1,6 @@
 {
   "name": "narwhal",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "description": "A web browser for Node",
   "main": "dist/narwhal.js",
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "fetter-js": "^0.13.0",
+    "parse-url": "^3.0.2",
     "request": "^2.83.0"
   }
 }
