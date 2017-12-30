@@ -10,6 +10,7 @@ export default {
     'fetter-js',
     'request',
     'parse-url',
+    'parse5',
   ],
   plugins: [
     nodeGlobals(),

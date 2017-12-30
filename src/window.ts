@@ -1,3 +1,4 @@
+import parse5 from 'parse5';
 import Console from './console';
 import Crypto from './crypto';
 import Document from './document';
@@ -15,6 +16,7 @@ import VisualViewport from './visualViewport';
 import WindowOrWorkerGlobalScope from './windowOrWorkerGlobalScope';
 import WindowEventHandlers from './windowEventHandlers';
 import BarProp from './helpers/barProp';
+import RunnableFunction from './helpers/runnableFunction';
 
 /**
  * @class Window
@@ -417,14 +419,15 @@ export default class Window extends EventTarget implements WindowOrWorkerGlobalS
 
   /**
    * @constructs
+   * @param {string} html The unparsed HTML of the page
+   * @param {Location} location The location being opened
    */
-  constructor(location: Location) {
+  constructor(html: string, location: Location) {
     super();
     this.closed = false;
     this.console = new Console();
     this.crypto = new Crypto();
     this.devicePixelRatio = 0;
-    this.document = new Document();
     this.frameElement = null;
     this.frames = [];
     this.fullScreen = false;
@@ -467,5 +470,22 @@ export default class Window extends EventTarget implements WindowOrWorkerGlobalS
     this.top = null;
     this.visualViewport = new VisualViewport();
     this.window = this;
+    this.create(html);
+  }
+
+  /**
+   * Runs the provided function with Narwhal's window
+   * @param {RunnableFunction} fn The function to run
+   */
+  run(fn: RunnableFunction) {
+    fn(this);
+  }
+  /**
+   * Parses HTML and generates the DOM
+   * 
+   */
+  private create(html: string) {
+    const parsed = parse5.parse(html);
+    this.document = new Document();
   }
 }

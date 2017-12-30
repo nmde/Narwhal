@@ -79,7 +79,7 @@ export default abstract class HTMLHyperlinkElementUtils {
    * @type {string}
    * @readonly
    */
-  readonly origin: string;
+  protected origin: string;
   /**
    * Return the href of the URL
    * @return {string} The URL

@@ -3,7 +3,6 @@ import Console from './console';
 import EventTarget from './eventTarget';
 import Location from './location';
 import Window from './window';
-import RunnableFunction from './helpers/runnableFunction';
 
 /**
  * @class Narwhal
@@ -23,28 +22,20 @@ export default class Narwhal {
    * @param {string} url The URL to open
    * @return {Promise<string>} A promise that will resolve the HTML of the requested page
    */
-  async open(url: string): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
+  async open(url: string): Promise<Window> {
+    return new Promise<Window>((resolve, reject) => {
       request(
         url,
-        (err, res, body: string) => {
+        (err, res, body) => {
           if (err) {
             reject(err);
           } else {
-            resolve(body);
-            this.window = new Window(new Location(url));
+            this.window = new Window(body, new Location(url));
+            resolve(this.window);
           }
         },
       );
     });
-  }
-  
-  /**
-   * Runs the provided function with Narwhal's window
-   * @param {RunnableFunction} fn The function to run
-   */
-  run(fn: RunnableFunction) {
-    fn(this.window);
   }
 
   /**
