@@ -6,7 +6,9 @@ export default {
   entry: './src/main.ts',
   dest: './dist/narwhal.js',
   external: [
+    'async',
     'fetter-js',
+    'request',
   ],
   plugins: [
     nodeGlobals(),

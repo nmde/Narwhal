@@ -1,3 +1,4 @@
+import request from 'request';
 import Console from './console';
 import EventTarget from './eventTarget';
 import Location from './location';
@@ -22,6 +23,26 @@ export default class Narwhal {
    */
   constructor() {
     this.window = new Window(new Location());
+  }
+
+  /**
+   * Opens the specified URL as a Narwhal window
+   * @param {string} url The URL to open
+   * @return {Promise<string>} A promise that will resolve the HTML of the requested page
+   */
+  async open(url: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      request(
+        url,
+        (err, res, body: string) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(body);
+          }
+        },
+      );
+    });
   }
   
   /**
