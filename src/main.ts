@@ -1,4 +1,6 @@
+import Console from './console';
 import EventTarget from './eventTarget';
+import Location from './location';
 import Window from './window';
 import RunnableFunction from './helpers/runnableFunction';
 
@@ -19,7 +21,7 @@ export default class Narwhal {
    * @constructs
    */
   constructor() {
-    this.window = new Window();
+    this.window = new Window(new Location());
   }
   
   /**
@@ -30,6 +32,13 @@ export default class Narwhal {
     fn(this.window);
   }
 
+  /**
+   * A statically accessible reference to Console
+   * @name Narwhal.Console
+   * @type Console
+   * @static
+   */
+  static Console = Console;
   /**
    * A staticly accessible reference to EventTarget
    * @name Narwhal.EventTarget

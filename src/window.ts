@@ -28,7 +28,7 @@ export default class Window extends EventTarget implements WindowOrWorkerGlobalS
   /**
    * Whether this window is closed or not
    * @name Window#closed
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @protected
    */
