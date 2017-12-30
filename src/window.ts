@@ -1,7 +1,6 @@
 import Console from './console';
 import Crypto from './crypto';
 import Document from './document';
-import DOMString from './domString';
 import Element from './element';
 import EventTarget from './eventTarget';
 import History from './history';
@@ -142,8 +141,8 @@ export default class Window extends EventTarget implements WindowOrWorkerGlobalS
   get location(): Location {
     return this.currentLocation;
   }
-  set location(newLocation: DOMString) {
-    // @TODO: Convert DOMString to Location
+  set location(newLocation: string) {
+    // @TODO: Convert string to Location
   }
   /**
    * Narwhal's location bar
